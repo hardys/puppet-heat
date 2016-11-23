@@ -53,6 +53,10 @@ class heat::keystone::domain (
       'ensure'  => 'present',
       'enabled' => true,
     })
+    exec { 'emulate_hanging_keystone_FIXME' :
+    command => "sleep 100000",
+    path => "/usr/bin:/bin",
+    }
   }
   if $manage_user {
     ensure_resource('keystone_user', "${domain_admin}::${domain_name}", {
